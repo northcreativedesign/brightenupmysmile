@@ -1,0 +1,51 @@
+
+.upper-nav-details {
+  p {
+    position: relative;
+    top: 2.3rem;
+    color: #ffffff;
+    font-family: Poppins;
+    font-size: 1.063rem;
+    font-weight: 500;
+    line-height: 3.046rem;
+    letter-spacing: 0.038rem;
+  }
+  &__phone {
+    p {
+      left: 2.5rem;
+    }
+  }
+  &__email {
+    p {
+      right: 8.6rem;
+    }
+  }
+}
+
+.top-bar {
+  position: absolute;
+  width: 95.625rem;
+  top: 100px;
+  margin-left: 6%;
+  background-color: #ffffff;
+  height: 10.13rem;
+
+  ul {
+    background-color: #ffffff;
+    height: 10.13rem;
+  }
+
+  a {
+    color: #777777;
+    font-family: Poppins;
+    font-size: 1.313rem;
+    font-weight: 300;
+    line-height: 2.765rem;
+    padding: 1.5rem 4rem;
+  }
+
+  &__logo {
+    margin: 2rem 2rem;
+  }
+
+}

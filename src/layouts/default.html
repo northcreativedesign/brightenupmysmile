@@ -1,0 +1,195 @@
+{{!-- This is the base layout for your project, and will be used on every page. --}}
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <title>Brighten Up My Smile | Floss Stones | Alaska</title>
+    <link rel="stylesheet" href="{{root}}assets/css/app.css">
+  </head>
+  <body>
+    <div class="floss-wrapper">
+      {{!-- Pages you create in the src/pages/ folder are inserted here when the flattened page is created. --}}
+      {{> navigation}}
+      {{> body}}
+      {{> footer}}
+
+      <script src="{{root}}assets/js/app.js"></script>
+      <script src="{{root}}assets/js/numbers.js"></script>
+      <script>
+      $(function () {
+          $(".round-button").click(function () {
+            $('div').removeClass('active');
+            $(this).addClass("active");
+          });
+        });
+      </script>
+      <script>
+      if( sessionStorage.getItem( 'ac_cart' ) == null ) {
+        var cart = {items:[]};
+        cart.items = [];
+      }
+      else{
+         //var cart = {items:[]};
+          cart = JSON.parse(sessionStorage.getItem('ac_cart'));
+      }
+
+function cartButton(){
+        let mediumGreyElement = document.getElementById('mediumGreyButton');
+        let beigeElement = document.getElementById('beigeButton');
+        let brownElement = document.getElementById('brownButton');
+        let lightGreyElement = document.getElementById('lightGreyButton');
+        let sandElement = document.getElementById('sandButton');
+
+        if (mediumGreyElement.classList.contains('active')) {
+            product = {}
+            product.name = 'FlossStone Medium Grey';
+            product.qty = document.querySelector('input').value;
+            product.img = "floss_overlay_1.png";
+            cart.items.push(product);
+            sessionStorage.setItem('ac_cart', JSON.stringify(cart));
+        }
+
+        else if (beigeElement.classList.contains('active')) {
+           product = {}
+            product.name = 'FlossStone Beige';
+            product.qty = document.querySelector('input').value;
+            product.img = "floss_overlay_1.png";
+            cart.items.push(product);
+            sessionStorage.setItem('ac_cart', JSON.stringify(cart));
+
+        }
+        else if (brownElement.classList.contains('active')) {
+            product = {}
+            product.name = 'FlossStone Brown';
+            product.img = "floss_overlay_1.png";
+            product.qty = document.querySelector('input').value;
+            cart.items.push(product);
+            sessionStorage.setItem('ac_cart', JSON.stringify(cart));
+
+        }
+        else if (lightGreyElement.classList.contains('active')) {
+            product = {}
+            product.name = 'FlossStone Light Grey';
+            product.qty = document.querySelector('input').value;
+            product.img = "floss_overlay_1.png";
+            cart.items.push(product);
+            sessionStorage.setItem('ac_cart', JSON.stringify(cart));
+
+            }
+        else if (sandElement.classList.contains('active')) {
+            product = {}
+            product.name = 'FlossStone Sand';
+            product.qty = document.querySelector('input').value;
+            product.img = "floss_overlay_1.png";
+            cart.items.push(product);
+            sessionStorage.setItem('ac_cart', JSON.stringify(cart));
+             }
+        else {
+          return
+        }
+      }
+        </script>
+        <script>
+     $(document).ready(function(){
+       if( sessionStorage.getItem( 'ac_cart' ) != null ) {
+        var stotal = 0;
+        var html = '';
+        var shipping =5.95;
+        var total = 0
+        var cart = JSON.parse(sessionStorage.getItem("ac_cart"));//no brackets
+        for (i = 0; i < cart.items.length; i++) {
+           product = cart.items[i].name;
+           price = 5.95;
+          qty = cart.items[i].qty;
+          img = cart.items[i].img;
+         
+          total += price*qty;
+          key = product.replace(/ /g,"-");
+           html += "<tr><td><img src='{{root}}assets/img/"+img+"' class='img' data-imag="+img+"></td>" + "<td class='pname'>" + product + "</td>" + "<td>$5.95</td><td class='pqty'><input  style='width:50px' type='text'  value='" + qty +"' class='qty'/></td>"+"<td id='subtotal'></td><td class='pdelete'><a data-product="+key+">X</a></td></tr>";
+         }
+         if(total!=0){
+          stotal = total+5.95;
+      }
+      else {shipping = 0;}
+         $('#cartTable').html(html);
+         $('#total').html("$"+total); 
+         $('#shipping').html("$"+shipping);
+         $('#stotal').html("$"+stotal.toFixed(2));
+       }
+         $( document ).on( "click", ".pdelete a", function(  ){
+             var cart = JSON.parse(sessionStorage.getItem("ac_cart"));//no brackets
+             var items = cart.items;
+             console.log(items);
+             var productName = $( this ).data( "product" );
+             for (i = 0; i < cart.items.length; i++) {
+               var product =   cart.items[i].name;
+              if(product.replace(/ /g,"-")== productName){
+                 items.splice( i, 1 );
+              }
+           }
+          newItems = items;
+          var updatedCart = {};
+          updatedCart.items = newItems;
+          var updatedTotal = 0;
+          var totalQty = 0;
+          if( newItems.length == 0 ) {
+            updatedTotal = 0;
+            totalQty = 0;
+          } else {
+            for( var j = 0; j < newItems.length; ++j ) {
+              var prod = newItems[j];
+              var sub = 5.95 * prod.qty;
+              updatedTotal += sub;
+              totalQty += prod.qty;
+            }
+          }
+          sessionStorage.setItem('ac_cart', JSON.stringify(updatedCart));
+          $( this ).parents( "tr" ).remove();
+          $('#stotal').html(updatedTotal);
+
+           });
+         $('#empty-cart').on('click',function(){
+            sessionStorage.clear();
+         });
+         $('#update-cart').on('click',function(){
+
+        var rows = $('#cartTable').find( "tr" );
+        var cart = sessionStorage.getItem('ac_cart');
+        var updatedCart = {};
+        updatedCart.items = [];
+        console.log(rows);
+
+        rows.each(function() {
+          var $row = $( this );
+          var pname = $.trim( $row.find( ".pname" ).text() );
+           var img =  $row.find( ".img" ).data('imag');
+           console.log(img);
+
+          console.log(img);
+          var pqty = $row.find( ".pqty > .qty" ).val();
+
+          var cartObj = {
+            name: pname,
+            qty: pqty,
+            img:img
+          };
+
+          updatedCart.items.push( cartObj );
+
+          var subTotal = pqty * 5.95;
+          //updatedTotal += subTotal;
+          //totalQty += pqty;
+        });
+          sessionStorage.setItem('ac_cart', JSON.stringify(updatedCart));
+    });
+
+    });
+        </script>
+    </div>
+  </body>
+</html>

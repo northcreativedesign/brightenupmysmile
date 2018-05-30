@@ -1,0 +1,105 @@
+
+<div id="site">
+
+<section class="cart">
+<div class="userdetails"></div>
+ <form id="paypal-form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+	<input type="hidden" name="cmd" value="_cart" />
+	<input type="hidden" name="upload" value="1" />
+	<input type="hidden" name="business" value="" />    
+	<input type="hidden" name="currency_code" value="" />
+	<input type="submit" id="paypal-btn" class="btn" value="Pay with PayPal" />
+	<input type="hidden" name="address_override" value="1">
+    <input type="hidden" name="first_name">
+    <input type="hidden" name="last_name" value="Doe">
+    <input type="hidden" name="address1">
+    <input type="hidden" name="city">
+    <input type="hidden" name="state">
+    <input type="hidden" name="zip">
+    <input type="hidden" name="country">
+
+ </form>		 		
+</section>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	  var currency = "&usd;"; // HTML entity of the currency to be displayed in the layout
+      var currencyString = "$"; // Currency symbol as textual string
+      var paypalCurrency = "USD"; // PayPal's currency code
+      var paypalBusinessEmail = "anandwootest@test.com"; // Your Business PayPal's account email address
+      var paypalURL = "https://www.sandbox.paypal.com/cgi-bin/webscr"; // The URL of the PayPal's form
+       
+	$('#paypal-btn').on('click',function(e) {
+	    //e.preventDefault(); 
+        var $form = $('#paypal-form');
+        var test = $form.attr( "action",paypalURL );
+
+         var name    = sessionStorage.getItem( "ac-name");
+         var last_name    = sessionStorage.getItem( "ac-last_name");
+	     var city    = sessionStorage.getItem( "ac-city");
+	     var address = sessionStorage.getItem( "ac-address");
+	     var zip     = sessionStorage.getItem( "ac-zip");
+		 var country = sessionStorage.getItem( "ac-country");
+         var state = sessionStorage.getItem( "ac-state" );
+       
+        $form.find( "input[name='business']" ).val(paypalBusinessEmail );
+        $form.find( "input[name='currency_code']" ).val(paypalCurrency );
+        $form.find( "input[name='first_name']" ).val(name );
+        $form.find( "input[name='last_name']" ).val(last_name );
+        $form.find( "input[name='city']" ).val(city );
+        $form.find( "input[name='address1']" ).val(address );
+        $form.find( "input[name='zip']" ).val(zip );
+        $form.find( "input[name='country']" ).val(country );
+        $form.find( "input[name='state']" ).val(state );
+       
+        var cart = JSON.parse(sessionStorage.getItem("ac_cart"));
+       
+        for( var i = 0; i <  cart.items.length; ++i ) {
+					var n = i + 1;
+					var name = cart.items[i].name;
+					var price = 5.95;
+					var qty =  cart.items[i].qty;
+					
+					$( "<div/>" ).html( "<input type='hidden' name='quantity_" + n + "' value='" + qty + "'/>" ).
+					insertBefore( "#paypal-btn" );
+					$( "<div/>" ).html( "<input type='hidden' name='item_name_" + n + "' value='" + name + "'/>" ).
+					insertBefore( "#paypal-btn" );
+					$( "<div/>" ).html( "<input type='hidden' name='item_number_" + n + "' value='SKU " + name + "'/>" ).
+					insertBefore( "#paypal-btn" );
+					$( "<div/>" ).html( "<input type='hidden' name='amount_" + n + "' value='" +price+ "'/>" ).
+					insertBefore( "#paypal-btn" );
+							
+				}		
+      });     
+ });
+	function displayUserDetails (){
+
+		var name    = sessionStorage.getItem( "ac-name");
+		var last_name    = sessionStorage.getItem( "ac-last_name" );
+		//var email   = sessionStorage.getItem( "ac-email" );
+	    var city    = sessionStorage.getItem( "ac-city");
+	    var address = sessionStorage.getItem( "ac-address");
+	    var zip = sessionStorage.getItem( "ac-zip");
+		var country = sessionStorage.getItem( "ac-country");
+	    var state = sessionStorage.getItem( "ac-state");
+
+	 	var html = "<div class='detail'>";
+		html += "<h2>Billing</h2>";
+	    html += "<ul>";
+	    html += "<li>" + name + "</li>";
+	     html += "<li>" +last_name + "</li>";
+	   // html += "<li>" + email + "</li>";
+	    html += "<li>" + city + "</li>";
+	    html += "<li>" + address + "</li>";
+	    html += "<li>" + zip + "</li>";
+	    html += "<li>" + country + "</li>";
+	    html += "<li>" + state + "</li>";
+		html += "</ul></div>";
+		html += "</ul></div>";
+	   $('.userdetails').html(html);			
+	}
+	displayUserDetails();
+</script>
+</body>
+</html>	
