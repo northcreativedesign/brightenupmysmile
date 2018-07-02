@@ -52,22 +52,52 @@
 @include motion-ui-transitions;
 @include motion-ui-animations;
 
-// TODO: Style TM Marks
-// TODO: Fix Orbit Photo Height
-// TODO: Swap Hero Image With Right Color
-// TODO: Get Cart Working
-// TODO: Style for Mobile
 
 
 $margin-top: 100px;
-
-@import "components/partials/navigation";
-@import "components/partials/footer";
 
 
 .floss-wrapper {
   overflow-x: hidden;
 }
+
+
+
+ @mixin tablet {
+   @media (min-width: #{$tablet}) and (max-width: #{$desktop}) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+     @content;
+   }
+ }
+
+ @mixin tabletport {
+   @media (min-width: #{$tablet}) and (max-width: #{$desktop}) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+     @content;
+   }
+ }
+
+ @mixin mobileland {
+   @media (max-width: #{$mobile}) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+     @content;
+   }
+ }
+
+ @mixin mobileport {
+   @media (max-width: #{$mobile}) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+     @content;
+   }
+ }
+
+ @mixin xlarge-only {
+   @media (min-width: 1400px) and (max-width: 1700px) {
+     @content;
+   }
+ }
+
+ $desktop: 1200px;
+ $laptop: 992px;
+ $tablet: 760px;
+ $mobile: 750px;
+
 
 // Hero Section
 
@@ -76,6 +106,12 @@ $margin-top: 100px;
   position: relative;
   z-index: -1;
   margin-top: -4.38rem;
+  @include mobileland {
+    margin-top: -7rem;
+  }
+  @include mobileport {
+    margin-top: -7.38rem;
+  }
   .grid-container {
     padding-left: 0;
     padding-right: 0;
@@ -102,14 +138,10 @@ $margin-top: 100px;
       font-weight: 300;
     }
   }
-
   img {
-    margin-left: 17%;
-    @include breakpoint(large down) {
-      margin-left: 0;
-    }
+    display: block;
+    margin: 0 auto;
   }
-
 }
 
 
@@ -130,6 +162,9 @@ $margin-top: 100px;
     background-size: cover;
     height: 672px;
     background-position: right;
+    @include mobileport {
+      background-position: center;
+    }
   }
 
   &__text {
@@ -157,6 +192,9 @@ $margin-top: 100px;
       font-family: Poppins;
       font-weight: 400;
       padding-right: 235px;
+    }
+    @include mobileport {
+      display: none;
     }
   }
 }
@@ -193,10 +231,16 @@ $margin-top: 100px;
 
   .medium-left {
     padding-right: 5px;
+    @include mobileport {
+      padding-right: 0;
+    }
   }
 
   .medium-right {
     padding-left: 5px;
+    @include mobileport {
+      padding-left: 0;
+    }
   }
 
   &__left-section {
@@ -205,8 +249,17 @@ $margin-top: 100px;
     padding-left: 3.4rem;
     padding-top: 5.5rem;
 
-    @include breakpoint(large down) {
+    @include breakpoint(xlarge down) {
       padding-left: 1rem;
+      padding-top: 2.5rem;
+    }
+
+    @include tablet {
+      padding-top: 1rem;
+    }
+
+    @include mobileport {
+      height: auto;
     }
 
     h1 {
@@ -260,6 +313,9 @@ $margin-top: 100px;
       font-style: italic;
       line-height: 1rem;
       margin-bottom: 0;
+      @include breakpoint(xxlarge down) {
+        padding-right: 2rem;
+      }
       @include breakpoint(large down) {
         padding-right: 1rem;
       }
@@ -269,7 +325,7 @@ $margin-top: 100px;
       padding-top: 1.5rem;
     }
 
-    .medium-4 {
+    .xlarge-4 {
       h6 {
         font-family: Poppins;
         font-size: 1rem;
@@ -278,6 +334,14 @@ $margin-top: 100px;
         letter-spacing: 0.05rem;
         margin-top: 0.7rem;
         padding-left: 20px;
+        @include breakpoint(xlarge down) {
+          padding-left: 10px;
+          font-size: 0.8rem;
+        }
+        @include tablet {
+          padding-left: 0;
+          font-size: 1rem;
+        }
       }
       .round-button-group {
         margin-top: 0.4rem;
@@ -291,8 +355,11 @@ $margin-top: 100px;
       border: 0.188rem solid #ffffff;
       margin-left: 5px;
       margin-right: 5px;
+      @include tablet {
+        margin-right: 0;
+      }
       &:nth-child(1) {
-        background-color: #b7b7b7;
+        background-color: #f2f0f0;
       }
       &:nth-child(2) {
         background-color: #c39968;
@@ -301,7 +368,7 @@ $margin-top: 100px;
         background-color: #7d4900;
       }
       &:nth-child(4) {
-        background-color: #f2f0f0;
+        background-color: #b7b7b7;
       }
       &:nth-child(5) {
         background-color: #534741;
@@ -331,20 +398,56 @@ $margin-top: 100px;
       height: 600px;
       img {
         height: 600px;
+        @include mobileport {
+          height: 450px;
+        }
       }
     }
     .orbit-previous {
-      margin-top: 27.5%;
-      margin-left: 87%;
+      margin-top: 250px;
+      margin-left: 82%;
       width: 3.75rem;
       height: 3.688rem;
+      @include breakpoint(xlarge down) {
+        margin-left: 80%;
+      }
+      @include breakpoint(large down) {
+        margin-left: 78%;
+      }
+      @include breakpoint(medium only) {
+        margin-left: 86%;
+      }
+      @include breakpoint(small only) {
+        margin-left: 70%;
+      }
+      @include tabletport {
+        margin-left: 83%;
+      }
+      @include mobileland {
+        margin-left: 82%;
+      }
+      @include mobileport {
+        margin-left: 68%;
+        margin-top: 180px;
+      }
       background-color: #c39968;
+
+      @include tablet {
+        margin-left: 75%;
+        margin-top: 50%;
+      }
     }
     .orbit-next {
       width: 3.75rem;
       height: 3.688rem;
       background-color: #c39968;
-      margin-top: 27.5%;
+      margin-top: 250px;
+      @include tablet {
+        margin-top: 50%;
+      }
+      @include mobileport {
+        margin-top: 180px;
+      }
     }
   }
 }
@@ -354,7 +457,7 @@ $margin-top: 100px;
 
 $input-number-size: 80px;
 .input-group {
-  margin-bottom: 0;
+  margin-bottom: 1px;
   background-color: #8da3af;
   color: white;
 }
@@ -407,11 +510,13 @@ $input-number-size: 80px;
   }
 
   .input-number-decrement {
-    margin-right: 0.3rem;
+    margin-right: 0;
+    margin-top: 3px;
   }
 
   .input-number-increment {
-    margin-left: 0.3rem;
+    margin-left: 0;
+    margin-top: 3px;
   }
 }
 
@@ -431,8 +536,24 @@ $input-number-size: 80px;
     @include breakpoint(xlarge down) {
       background-position: center;
     }
+    @include tabletport {
+      height: 616px;
+    }
+    @include mobileport {
+      background: #b7b7b7;
+      height: auto;
+    }
     .medium-5 {
       margin-left: 50px;
+      @include tablet {
+        margin-left: 30px;
+      }
+      @include mobileland {
+        margin-left: 20px;
+      }
+      @include mobileport {
+        margin-left: 10px;
+      }
     }
   }
   h1 {
@@ -442,14 +563,22 @@ $input-number-size: 80px;
     font-weight: 400;
     line-height: 3.344rem;
     letter-spacing: 0.094rem;
-    margin-top: 70px;
+    margin-top: 50px;
     @include breakpoint(xlarge down) {
       font-size: 2rem;
     }
-    span {
-      font-size: 1.5rem;
-      position: relative;
-      top: -15px;
+    @include tablet {
+      margin-top: 23px;
+      font-size: 1.9rem;
+    }
+    @include mobileland {
+      margin-top: 15px;
+      line-height: 2.2rem;
+      font-size: 1.3rem
+
+    }
+    @include mobileport {
+      margin-top: 20px;
     }
   }
   p {
@@ -462,11 +591,6 @@ $input-number-size: 80px;
     padding-right: 14%;
     @include breakpoint(xlarge down) {
       font-size: 1rem;
-    }
-    span {
-      font-size: 1rem;
-      position: relative;
-      top: -5px;
     }
   }
   .button {
@@ -481,12 +605,18 @@ $input-number-size: 80px;
     @include breakpoint(xlarge down) {
       float: left;
     }
+    @include mobileport {
+      margin-bottom: 20px;
+    }
   }
 }
 
 .flossimages {
   position: relative;
   z-index: 1;
+  @include mobileport {
+    display: none;
+  }
   .cell {
     &:first-child {
       margin-top: -80px;
@@ -495,11 +625,18 @@ $input-number-size: 80px;
       position: absolute;
       left: 100px;
       top: 40px;
+      @include tabletport {
+        top: 200px;
+      }
     }
     &:nth-child(3) {
       position: absolute;
       top: 460px;
       right: 65px;
+      @include tabletport {
+        top: 650px;
+        right: 0;
+      }
     }
   }
 }
@@ -516,6 +653,9 @@ $input-number-size: 80px;
       padding: 0 10rem;
       line-height: 2.2rem;
       margin-bottom: 1rem;
+    }
+    @include breakpoint(large down) {
+      padding: 0;
     }
   }
 }
@@ -540,3 +680,5 @@ $input-number-size: 80px;
 
 
 @import "components/cart";
+@import "components/partials/navigation";
+@import "components/partials/footer";

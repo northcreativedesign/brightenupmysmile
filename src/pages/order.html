@@ -1,24 +1,29 @@
-
+<div class="checkout-header"></div>
 <div id="site">
 
-<section class="cart">
-<div class="userdetails"></div>
- <form id="paypal-form" method="post" action="https://www.paypal.com/cgi-bin/webscr">
+<section class="cart order-cart">
+<div class="grid-container">
+<div class="userdetails">
+	<div class="grix-x">
+
+	</div>
+</div>
+<form id="paypal-form" method="post" action="https://www.paypal.com/cgi-bin/webscr">
 	<input type="hidden" name="cmd" value="_cart" />
 	<input type="hidden" name="upload" value="1" />
 	<input type="hidden" name="business" value="" />
 	<input type="hidden" name="currency_code" value="" />
-	<input type="submit" id="paypal-btn" class="btn" value="Pay with PayPal" />
+	<input type="submit" id="paypal-btn" class="button" value="Pay with PayPal" />
 	<input type="hidden" name="address_override" value="1">
-    <input type="hidden" name="first_name">
-    <input type="hidden" name="last_name" value="Doe">
-    <input type="hidden" name="address1">
-    <input type="hidden" name="city">
-    <input type="hidden" name="state">
-    <input type="hidden" name="zip">
-    <input type="hidden" name="country">
-
- </form>
+	<input type="hidden" name="first_name">
+	<input type="hidden" name="last_name" value="Doe">
+	<input type="hidden" name="address1">
+	<input type="hidden" name="city">
+	<input type="hidden" name="state">
+	<input type="hidden" name="zip">
+	<input type="hidden" name="country">
+</form>
+</div>
 </section>
 </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -27,8 +32,8 @@
 	  var currency = "&usd;"; // HTML entity of the currency to be displayed in the layout
       var currencyString = "$"; // Currency symbol as textual string
       var paypalCurrency = "USD"; // PayPal's currency code
-      var paypalBusinessEmail = "anandwootest@test.com"; // Your Business PayPal's account email address
-      var paypalURL = "https://www.sandbox.paypal.com/cgi-bin/webscr"; // The URL of the PayPal's form
+      var paypalBusinessEmail = "info@brightenupmysmile.com"; // Your Business PayPal's account email address
+	  var paypalURL = "https://www.paypal.com/cgi-bin/webscr"; // The URL of the PayPal's form
 
 	$('#paypal-btn').on('click',function(e) {
 	    //e.preventDefault();
@@ -88,22 +93,17 @@
 	    var state = sessionStorage.getItem( "ac-state");
 
 
-	 	var html = "<div class='detail'>";
-		html += "<h2>Billing</h2>";
-	    html += "<ul>";
-	    html += "<li>" + name + "</li>";
-	     html += "<li>" +last_name + "</li>";
-	   // html += "<li>" + email + "</li>";
-	    html += "<li>" + city + "</li>";
-	    html += "<li>" + address + "</li>";
-	    html += "<li>" + zip + "</li>";
-	    html += "<li>" + country + "</li>";
-	    html += "<li>" + state + "</li>";
-		html += "</ul></div>";
-		html += "</ul></div>";
+	 	var html = "<div class='detail grid-x'>";
+		html += "<div class='small-12 cell'><h2>Billing</h2></div>";
+	    html += '<div class="small-6 cell">' + name + '</div>';
+        html += '<div class="small-6 cell">' + last_name + '</div>';
+	    html += "<div class='small-6 cell'>" + address + "</div>";
+        html += "<div class='small-6 cell'>" + city + "</div>";
+	    html += "<div class='small-6 cell'>" + zip + "</div>";
+	    html += "<div class='small-1 cell' style='text-align: center;'>" + country + "</div>";
+	    html += "<div class='small-1 cell'>" + state + "</div>";
+		html += "</div>";
 	   $('.userdetails').html(html);
 	}
 	displayUserDetails();
 </script>
-</body>
-</html>

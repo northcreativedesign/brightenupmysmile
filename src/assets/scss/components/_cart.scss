@@ -1,8 +1,6 @@
 // CART
 
 .cart {
-  margin-top: 15%;
-  height: 90vh;
   li {
     list-style: none;
   }
@@ -11,16 +9,29 @@
     background-color: #c39968;
     font-family: Poppins;
   }
-  .small-2 {
-    width: 10.6667%;
-  }
-  .small-offset-6 {
-    margin-left: 52%;
+  .small-6  {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 
-.sub-total {
-  text-align: right;
+table.stack td {
+  @include tabletport {
+    display: inline-block;
+  }
+  @include mobileland {
+    display: inline-block;
+  }
+  @include mobileport {
+    display: inline-block;
+  }
+}
+
+#shopping-cart-actions {
+  margin: 0;
+  .grid-container {
+    padding: 0;
+  }
 }
 
 
@@ -31,8 +42,13 @@
  font-size: 1.2rem;
  color: #707070;
  &:first-child {
-   background-color: #e6e6e6;
    width: 22.438rem;
+   @include mobileland {
+     width: 15rem;
+   }
+   @include mobileport {
+     width: 100%;
+   }
  }
  &:nth-child(4) {
    padding-top: 18px;
@@ -43,6 +59,9 @@
   float: left;
   position: relative;
   left: 50px;
+  @include mobileland {
+    left: -10px;
+  }
 }
 
 .pdelete {
@@ -55,11 +74,28 @@
   }
 }
 
+// CHECKOUT SECTION
+
+.checkout-header {
+    height: 23.375rem;
+    background-color: #98c7c4;
+    position: relative;
+    top: -70px;
+    z-index: -1;
+    @include mobileland {
+      top: -115px;
+    }
+    @include mobileport {
+      top: -150px;
+      height: 15rem;
+    }
+}
+
 .address-section {
   background-color: #e6e6e6;
   height: 13.375rem;
   position: relative;
-  top: 200px;
+  top: -70px;
   .address-container {
     padding: 4.5rem 0;
   }
@@ -84,3 +120,62 @@
   }
 }
 
+
+.submit {
+  .submit__button {
+    position: relative;
+    top: -70px;
+    left: 13px;
+    .button {
+          width: 10.625rem;
+          height: 3.563rem;
+          border-radius: 0.5rem;
+          background-color: #c39968;
+          padding: 1.2rem 0;
+          font-size: 1.375rem;
+          font-weight: 700;
+          letter-spacing: 0.206rem;
+          text-transform: uppercase;
+    }
+  }
+}
+
+
+.detail {
+  padding-left: 20rem;
+  @include mobileland {
+    padding-left: 10rem;
+  }
+  @include mobileport {
+    padding-left: 5rem;
+  }
+  h2 {
+    padding-left: 0.7rem;
+  }
+  .small-1 {
+    width: 5.6%;
+    @include mobileland {
+      width: 9.5%;
+    }
+    @include mobileport {
+      width: 15%;
+    }
+  }
+}
+
+#paypal-btn {
+  margin-left: 33rem;
+  @include mobileland {
+    margin-left: 10.9rem;
+  }
+  @include mobileport {
+    margin-left: 6rem;
+  }
+}
+
+
+.cart-total {
+  @include mobileport {
+    padding-left: 1rem;
+  }
+}

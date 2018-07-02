@@ -1,5 +1,30 @@
 
 .upper-nav-details {
+  .medium-2 {
+        @include mobileland {
+          width: 20.6%;
+        }
+  }
+  .large-9 {
+    text-align: right;
+    width: 65%;
+    @include mobileland {
+      width: 61%;
+    }
+    @include mobileport {
+      width: 45%;
+    }
+  }
+  .small-6 {
+    @include mobileport {
+      width: 48%;
+    }
+  }
+  .medium-7 {
+    @include tabletport {
+      width: 63.3333%;
+    }
+  }
   p {
     position: relative;
     top: 2.3rem;
@@ -9,17 +34,25 @@
     font-weight: 500;
     line-height: 3.046rem;
     letter-spacing: 0.038rem;
+    left: 60px;
+    @include mobileport {
+      font-size: 0.9rem;
+      left: -30px;
+      top: 1rem;
+    }
   }
   &__phone {
     p {
       left: -2.8rem;
+      @include mobileport {
+        font-size: 0.9rem;
+        left: 0;
+        top: 1rem;
+      }
     }
   }
   .small-offset-6 {
     margin-left: 53.5%;
-    @include breakpoint(xlarge down) {
-
-    }
   }
 }
 
@@ -36,6 +69,11 @@
     margin: 0
   }
 
+  @include mobileport {
+    padding: 0;
+    top: 112px;
+  }
+
   ul {
     background-color: #ffffff;
     height: 10.13rem;
@@ -47,7 +85,7 @@
     font-size: 1.313rem;
     font-weight: 300;
     line-height: 2.765rem;
-    padding: 1.5rem 4rem;
+    padding: 1.5rem 3rem;
     @include breakpoint(xlarge down) {
       padding: 2rem 1.5rem;
       font-size: 1.313rem;
@@ -65,4 +103,9 @@
     }
   }
 
+}
+
+.title-bar {
+  height: 3rem;
+  background-color: #c39968;
 }

@@ -2,9 +2,57 @@
   height: 23.25rem;
   background-color: #8da3af;
   color: white;
+  @include breakpoint(medium down) {
+    height: auto;
+  }
+  @include tabletport {
+    height: auto;
+  }
+  @include mobileland {
+    height: auto;
+  }
+  @include mobileport {
+    height: auto;
+  }
   .grid-container {
     padding-left: 8rem;
     padding-top: 6.3rem;
+    @include tablet {
+      padding-left: 3rem;
+      padding-top: 4rem;
+    }
+    @include tabletport {
+      padding-left: 4rem;
+      padding-top: 3rem;
+    }
+    @include mobileland {
+      padding-left: 2rem;
+      padding-top: 3rem;
+    }
+    @include mobileport {
+      padding-left: 2rem;
+      padding-top: 3rem;
+    }
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .medium-offset-3 {
+    @include tablet {
+      margin-left: 0;
+    }
+  }
+
+  .social {
+    @include tabletport {
+      padding-left: 5rem;
+    }
+    @include mobileland {
+      padding-left: 5rem;
+    }
   }
 
   h3 {
